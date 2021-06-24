@@ -29,6 +29,8 @@ public class ControllerMusica {
     public List<CantorDTO> listAll(){
         return cantorService.listAll();
     }
+    @GetMapping("/{id}")
+    @ResponseStatus(HttpStatus.OK)
     public CantorDTO findById(@PathVariable Long id) throws CantorNotFoundException {
         return cantorService.findById(id);
     }
