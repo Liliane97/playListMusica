@@ -4,6 +4,7 @@ import digital.innovation.Musica.dto.mapper.CantorMapper;
 import digital.innovation.Musica.dto.request.CantorDTO;
 import digital.innovation.Musica.dto.response.MessageResponseDTO;
 import digital.innovation.Musica.entities.Cantor;
+import digital.innovation.Musica.exception.CantorNotFoundException;
 import digital.innovation.Musica.repositories.CantorRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,7 +36,11 @@ public class CantorService {
                 .collect(Collectors.toList());
 
     }
-
+        public CantorDTO findById(Long id) throws CantorNotFoundException {
+            Cantor cantor = cantorRepository.findById(id)
+                    .orElseThrow(() -> new CantorNotFoundException(id));
+            return cantorMapper.toDTO(cantor);
+        }
 
     private MessageResponseDTO createMessageResponse(String message, Long id) {
         return MessageResponseDTO.builder()

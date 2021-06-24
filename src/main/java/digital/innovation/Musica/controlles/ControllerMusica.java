@@ -2,6 +2,7 @@ package digital.innovation.Musica.controlles;
 
 import digital.innovation.Musica.dto.request.CantorDTO;
 import digital.innovation.Musica.dto.response.MessageResponseDTO;
+import digital.innovation.Musica.exception.CantorNotFoundException;
 import digital.innovation.Musica.services.CantorService;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,5 +28,8 @@ public class ControllerMusica {
     @ResponseStatus(HttpStatus.OK)
     public List<CantorDTO> listAll(){
         return cantorService.listAll();
+    }
+    public CantorDTO findById(@PathVariable Long id) throws CantorNotFoundException {
+        return cantorService.findById(id);
     }
 }
