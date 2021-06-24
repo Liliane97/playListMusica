@@ -40,4 +40,9 @@ public class ControllerMusica {
     public MessageResponseDTO update (@PathVariable Long id, @RequestBody @Valid CantorDTO cantorDTO) throws CantorNotFoundException {
         return cantorService.update(id, cantorDTO);
     }
+    @DeleteMapping("{/id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void delete (@PathVariable Long id) throws CantorNotFoundException {
+        cantorService.delete(id);
+    }
 }

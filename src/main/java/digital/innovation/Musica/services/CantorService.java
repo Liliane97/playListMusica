@@ -52,6 +52,11 @@ public class CantorService {
 
             return messageResponse;
     }
+        public  void delete(Long id) throws CantorNotFoundException {
+            cantorRepository.findById(id)
+                    .orElseThrow(() -> new CantorNotFoundException(id));
+            cantorRepository.deleteById(id);
+        }
     private MessageResponseDTO createMessageResponse(String message, Long id) {
         return MessageResponseDTO.builder()
                 .message(message + id)
