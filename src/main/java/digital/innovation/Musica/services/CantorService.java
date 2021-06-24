@@ -25,7 +25,7 @@ public class CantorService {
         Cantor cantor = cantorMapper.toModel(cantorDTO);
         Cantor savedCantor = cantorRepository.save(cantor);
 
-        MessageResponseDTO messageResponse = createMessageResponse("Cantor criado com sucesso ID: ",savedCantor.getId());
+        MessageResponseDTO messageResponse = createMessageResponse("Cantor e música adicionado com sucesso ID: ",savedCantor.getId());
 
         return messageResponse;
     }
@@ -42,6 +42,16 @@ public class CantorService {
             return cantorMapper.toDTO(cantor);
         }
 
+        public MessageResponseDTO update(Long id,CantorDTO cantorDTO) throws CantorNotFoundException{
+            cantorRepository.findById(id)
+                    .orElseThrow(() -> new CantorNotFoundException(id));
+            Cantor updatedCantor = cantorMapper.toModel(cantorDTO);
+            Cantor savedCantor = cantorRepository.save(updatedCantor);
+
+            MessageResponseDTO messageResponse = createMessageResponse("Cantor e música atualizado com sucesso ID: ", savedCantor.getId());
+
+            return messageResponse;
+    }
     private MessageResponseDTO createMessageResponse(String message, Long id) {
         return MessageResponseDTO.builder()
                 .message(message + id)

@@ -34,4 +34,10 @@ public class ControllerMusica {
     public CantorDTO findById(@PathVariable Long id) throws CantorNotFoundException {
         return cantorService.findById(id);
     }
+    
+    @PutMapping("/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public MessageResponseDTO update (@PathVariable Long id, @RequestBody @Valid CantorDTO cantorDTO) throws CantorNotFoundException {
+        return cantorService.update(id, cantorDTO);
+    }
 }
